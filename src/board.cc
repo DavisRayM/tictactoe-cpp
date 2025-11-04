@@ -40,65 +40,23 @@ bool Board::Play(int x, int y, Token player, Board *board) const {
 }
 
 BoardWinState Board::WinState() const {
-  BoardWinState winner = ONGOING;
+  for (auto &line: GetLines()) {
+    bool win = true;
 
-  /* Check rows for any winner */
-  for (int x = 0; x < 3 && winner == ONGOING; x++) {
-    int start = state[x][0];
-    winner = win_state(start);
-
-    for (int y = 1; y < 3; y++) {
-      if (start != state[x][y]) {
-        winner = ONGOING;
-        break;
-      }
+    for (int i = 1; i < 3; i++) {
+      if (line[i - 1] != line[i])
+        win = false;
     }
-  }
 
-  /* Check columns for any winner */
-  for (int y = 0; y < 3 && winner == ONGOING; y++) {
-    int start = state[0][y];
-    winner = win_state(start);
-
-    for (int x = 1; x < 3; x++) {
-      if (start != state[x][y]) {
-        winner = ONGOING;
-        break;
-      }
-    }
-  }
-
-  /* Check Left-Right Diagonal for any winner */
-  if (winner == ONGOING) {
-    int start = state[0][0];
-    winner = win_state(start);
-
-    for (int x = 1, y = 1; x < 3 && y < 3; x++, y++) {
-      if (start != state[x][y]) {
-        winner = ONGOING;
-        break;
-      }
-    }
-  }
-
-  /* Check Right-Left Diagonal for any winner */
-  if (winner == ONGOING) {
-    int start = state[2][0];
-    winner = win_state(start);
-
-    for (int x = 1, y = 1; x >= 0 && y < 3; x--, y++) {
-      if (start != state[x][y]) {
-        winner = ONGOING;
-        break;
-      }
-    }
+    if (win)
+      return win_state(line[0]);
   }
 
   if (ValidMoves().empty()) {
-    winner = DRAW;
+    return DRAW;
   }
 
-  return winner;
+  return ONGOING;
 }
 
 std::vector<Move> Board::ValidMoves() const {
