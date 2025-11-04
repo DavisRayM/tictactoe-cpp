@@ -56,8 +56,6 @@ void Game::Display() const {
 }
 
 bool Game::Update(bool simulate) {
-  int x, y;
-  Board *next = new Board;
   Move move(-1, -1);
   if (simulate)
     move = BestMove(current, player);
