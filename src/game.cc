@@ -1,4 +1,5 @@
 #include <game.hpp>
+#include <ai.hpp>
 #include <iostream>
 
 /// Returns display character for a player token.
@@ -54,10 +55,14 @@ void Game::Display() const {
   }
 }
 
-bool Game::Update() {
+bool Game::Update(bool simulate) {
   int x, y;
   Board *next = new Board;
-  Move move = RequestMove(current, player);
+  Move move(-1, -1);
+  if (simulate)
+    move = RequestMove(current, player);
+  else
+    move = BestMove(current, player);
 
   BoardWinState state = UpdateBoard(move);
 

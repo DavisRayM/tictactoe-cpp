@@ -16,7 +16,7 @@ public:
   ///
   /// pre: live is true
   /// post: updates generation and live
-  bool Update();
+  bool Update(bool simulate = false);
 
 private:
   Board *current;
