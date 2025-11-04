@@ -4,8 +4,20 @@
 
 class Game {
 public:
-  Game();
-  ~Game();
+  Game() {
+    current = new Board;
+    player = X;
+    generation = 0;
+    live = true;
+  }
+
+  ~Game() {
+    delete current;
+    current = nullptr;
+    generation = 0;
+    live = false;
+    player = X;
+  }
 
   /// Display the current game board.
   void Display() const;

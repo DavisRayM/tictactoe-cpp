@@ -32,18 +32,6 @@ static Move RequestMove(Board *board, Token player) {
   return Move(x, y);
 }
 
-Game::Game() {
-  current = new Board;
-  player = X;
-  generation = 0;
-  live = true;
-}
-
-Game::~Game() {
-  delete current;
-  current = nullptr;
-}
-
 void Game::Display() const {
   std::cout << "-------\n";
 
