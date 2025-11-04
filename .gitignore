@@ -2,6 +2,8 @@
 *
 
 # Allow
-!README.md
 !.gitignore
 !CMakeLists.txt
+!README.md
+!src/
+!src/**/*
