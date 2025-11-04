@@ -25,7 +25,7 @@ int InnerMiniMax(Board *board, int depth, bool maximize,
   int bestScore = maximize ? INT_MIN : INT_MAX;
   for (auto &move : board->ValidMoves()) {
     Board next;
-    if (!next.Play(move.x, move.y, currentPlayer, &next))
+    if (!board->Play(move.x, move.y, currentPlayer, &next))
       throw std::runtime_error("Invalid move!");
 
     int score =
