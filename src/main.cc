@@ -3,13 +3,16 @@
 
 int main(int argc, char **argv) {
   Game game;
+  bool gameOngoing;
+  bool simulate = false;
 
-  // Simulated Game
-  do {
-    game.Display();
-  } while (game.Update(true));
-
+  // vs AI Game
   game.Display();
+  do {
+    gameOngoing = game.Update(simulate);
+    simulate = !simulate;
+    game.Display();
+  } while (gameOngoing);
 
   return 0;
 }

@@ -19,8 +19,6 @@ static char player_token(size_t token) {
 
 static Move RequestMove(Board *board, Token player) {
   int x, y;
-
-  std::cout << "Player " << player_token(player) << "'s turn.\n";
   do {
     std::cout << "Enter x coordinate: ";
     std::cin >> x;
@@ -33,7 +31,7 @@ static Move RequestMove(Board *board, Token player) {
 }
 
 void Game::Display() const {
-  std::cout << "-------\n";
+  std::cout << "\n-------\n";
 
   for (int r = 0; r < 3; r++) {
     for (int c = 0; c < 3; c++) {
@@ -45,6 +43,8 @@ void Game::Display() const {
 
 bool Game::Update(bool simulate) {
   Move move(-1, -1);
+
+  std::cout << "\nPlayer " << player_token(player) << "'s turn.\n";
   if (simulate)
     move = BestMove(current, player);
   else
