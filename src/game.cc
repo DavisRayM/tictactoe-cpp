@@ -59,25 +59,14 @@ bool Game::Update() {
   Board *next = new Board;
   Move move = RequestMove(current, player);
 
-  switch(UpdateBoard(move)) {
-    case ONGOING:
-      return true;
-      break;
-    case CIRCLE_WIN:
+  BoardWinState state = UpdateBoard(move);
+
+  if (state == CIRCLE_WIN)
       std::cout << "O wins!\n";
-      return false;
-      break;
-    case X_WIN:
+  if (state == X_WIN)
       std::cout << "X wins!\n";
-      return false;
-      break;
-    case DRAW:
+  if (state == DRAW)
       std::cout << "No one wins!\n";
-      return false;
-      break;
-    default:
-      std::cout << "Something bad happened!\n";
-      return false;
-      break;
-  }
+
+  return live;
 }

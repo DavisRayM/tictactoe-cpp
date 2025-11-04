@@ -32,12 +32,22 @@ private:
 
     delete current;
     current = next;
+    generation += 1;
 
     if (player == X)
       player = CIRCLE;
     else
       player = X;
 
-    return current->WinState();
+    auto winState = current->WinState();
+    switch (winState) {
+    case CIRCLE_WIN || X_WIN || DRAW:
+      live = false;
+      break;
+    default:
+      break;
+    }
+
+    return winState;
   }
 };
