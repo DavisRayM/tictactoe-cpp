@@ -4,7 +4,7 @@
 #include <vector>
 
 enum Token {
-  CIRCLE=1,
+  CIRCLE = 1,
   X,
 };
 

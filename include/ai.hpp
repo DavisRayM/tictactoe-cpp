@@ -5,8 +5,8 @@
 #include <stdexcept>
 
 namespace {
-int InnerMiniMax(Board *board, int depth, bool maximize,
-                        Token currentPlayer, Token maximizingPlayer) {
+int InnerMiniMax(Board *board, int depth, bool maximize, Token currentPlayer,
+                 Token maximizingPlayer) {
   Token nextPlayer = (currentPlayer == CIRCLE) ? X : CIRCLE;
 
   if (depth == 0 || board->ValidMoves().empty()) {
@@ -37,17 +37,17 @@ int InnerMiniMax(Board *board, int depth, bool maximize,
 }
 } // namespace
 
-
 static Move BestMove(Board *board, Token player, int depth = 5) {
   int bestScore = INT_MIN;
   Move bestMove(-1, -1);
 
-  for (auto &move: board->ValidMoves()) {
+  for (auto &move : board->ValidMoves()) {
     Board next;
     if (!board->Play(move.x, move.y, player, &next))
       continue;
 
-    int score = InnerMiniMax(&next, depth - 1, false, (player == CIRCLE) ? X : CIRCLE, player);
+    int score = InnerMiniMax(&next, depth - 1, false,
+                             (player == CIRCLE) ? X : CIRCLE, player);
     if (score > bestScore) {
       bestScore = score;
       bestMove = move;

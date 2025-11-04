@@ -2,18 +2,18 @@
 
 static BoardWinState win_state(int winner) {
   switch (winner) {
-    case 0:
-      return ONGOING;
-      break;
-    case 1:
-      return CIRCLE_WIN;
-      break;
-    case 2:
-      return X_WIN;
-      break;
-    default:
-      return ERROR;
-      break;
+  case 0:
+    return ONGOING;
+    break;
+  case 1:
+    return CIRCLE_WIN;
+    break;
+  case 2:
+    return X_WIN;
+    break;
+  default:
+    return ERROR;
+    break;
   }
 }
 
@@ -94,8 +94,9 @@ BoardWinState Board::WinState() const {
     }
   }
 
-  if (ValidMoves().size() == 0)
+  if (ValidMoves().empty()) {
     winner = DRAW;
+  }
 
   return winner;
 }
