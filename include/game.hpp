@@ -22,7 +22,7 @@ public:
   /// Display the current game board.
   void Display() const;
 
-  /// Updates the current game generation; requests a move
+  /// Updates the current game generation; requests or simulates a move
   /// from the player and transitions to next state. Returns whether
   /// the game is still live.
   ///
