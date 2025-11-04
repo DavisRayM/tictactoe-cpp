@@ -8,6 +8,8 @@ add_executable(TicTacToe)
 target_sources(TicTacToe
   PRIVATE
     src/main.cc
+    src/game.cc
+    src/board.cc
 )
 target_link_libraries(TicTacToe
   PRIVATE

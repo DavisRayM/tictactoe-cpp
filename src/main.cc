@@ -1,6 +1,11 @@
-#include <iostream>
+#include <game.hpp>
 
 int main(int argc, char** argv) {
-  std::cout << "Hello World \n";
+  Game game;
+
+  game.Display();
+  while (game.Update()) {
+    game.Display();
+  }
   return 0;
 }
