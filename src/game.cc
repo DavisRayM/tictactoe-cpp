@@ -65,7 +65,6 @@ bool Game::Update(bool simulate) {
     move = RequestMove(current, player);
 
   BoardWinState state = UpdateBoard(move);
-  std::cout << "State: " << state << " Live: " << this->live << "\n";
 
   if (state == CIRCLE_WIN)
     std::cout << "O wins!\n";
