@@ -2,6 +2,7 @@
 #define BOARD_HPP
 
 #include <vector>
+#include <array>
 
 enum Token {
   CIRCLE = 1,
@@ -44,8 +45,8 @@ struct Board {
   std::vector<Move> ValidMoves() const;
 
   /// Get the winning lines for the TicTacToe board.
-  std::vector<Token[3]> GetLines() const {
-    std::vector<Token[3]> lines;
+  std::vector<std::array<Token, 3>> GetLines() const {
+    std::vector<std::array<Token, 3>> lines;
 
     /* Add row lines */
     lines.push_back({state[0][0], state[0][1], state[0][2]});
