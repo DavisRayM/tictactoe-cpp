@@ -26,5 +26,6 @@ target_sources(LibTicTacToe
   FILES
     include/board.hpp
     include/game.hpp
+    include/ai.hpp
 )
 set_target_properties(LibTicTacToe PROPERTIES LINKER_LANGUAGE CXX)
