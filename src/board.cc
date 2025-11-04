@@ -40,7 +40,7 @@ bool Board::Play(int x, int y, Token player, Board *board) const {
 }
 
 BoardWinState Board::WinState() const {
-  for (auto &line: GetLines()) {
+  for (auto &line : GetLines()) {
     bool win = true;
 
     for (int i = 1; i < 3; i++) {

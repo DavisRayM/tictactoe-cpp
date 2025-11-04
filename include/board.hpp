@@ -1,8 +1,8 @@
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
-#include <vector>
 #include <array>
+#include <vector>
 
 enum Token {
   CIRCLE = 1,
