@@ -1,0 +1,7 @@
+# Disallow everything
+*
+
+# Allow
+!README.md
+!.gitignore
+!CMakeLists.txt
