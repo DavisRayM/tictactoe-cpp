@@ -1,3 +1,5 @@
+#ifndef AI_HPP
+#define AI_HPP
 #include "board.hpp"
 #include <climits>
 #include <stdexcept>
@@ -54,3 +56,4 @@ static Move BestMove(Board *board, Token player, int depth = 5) {
 
   return bestMove;
 }
+#endif

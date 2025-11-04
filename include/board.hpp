@@ -1,3 +1,6 @@
+#ifndef BOARD_HPP
+#define BOARD_HPP
+
 #include <vector>
 
 enum Token {
@@ -40,3 +43,5 @@ struct Board {
   /// cleaned up as such implementation should handle.
   std::vector<Move> ValidMoves() const;
 };
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef GAME_HPP
+#define GAME_HPP
 #include "board.hpp"
 
 class Game {
@@ -51,3 +53,4 @@ private:
     return winState;
   }
 };
+#endif
