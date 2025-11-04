@@ -1,5 +1,5 @@
-#include <game.hpp>
 #include <ai.hpp>
+#include <game.hpp>
 #include <iostream>
 
 /// Returns display character for a player token.
@@ -17,7 +17,7 @@ static char player_token(size_t token) {
   }
 }
 
-static Move RequestMove(Board* board, Token player) {
+static Move RequestMove(Board *board, Token player) {
   int x, y;
 
   std::cout << "Player " << player_token(player) << "'s turn.\n";
@@ -65,13 +65,14 @@ bool Game::Update(bool simulate) {
     move = RequestMove(current, player);
 
   BoardWinState state = UpdateBoard(move);
+  std::cout << "State: " << state << " Live: " << this->live << "\n";
 
   if (state == CIRCLE_WIN)
-      std::cout << "O wins!\n";
+    std::cout << "O wins!\n";
   if (state == X_WIN)
-      std::cout << "X wins!\n";
+    std::cout << "X wins!\n";
   if (state == DRAW)
-      std::cout << "No one wins!\n";
+    std::cout << "No one wins!\n";
 
-  return live;
+  return this->live;
 }

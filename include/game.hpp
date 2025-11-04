@@ -33,18 +33,21 @@ private:
       return ERROR;
 
     delete current;
-    current = next;
-    generation += 1;
+    this->current = next;
+    this->generation += 1;
 
     if (player == X)
-      player = CIRCLE;
+      this->player = CIRCLE;
     else
-      player = X;
+      this->player = X;
 
     auto winState = current->WinState();
     switch (winState) {
-    case CIRCLE_WIN || X_WIN || DRAW:
-      live = false;
+    case CIRCLE_WIN:
+    case X_WIN:
+    case DRAW:
+    case ERROR:
+      this->live = false;
       break;
     default:
       break;
