@@ -60,9 +60,9 @@ bool Game::Update(bool simulate) {
   Board *next = new Board;
   Move move(-1, -1);
   if (simulate)
-    move = RequestMove(current, player);
-  else
     move = BestMove(current, player);
+  else
+    move = RequestMove(current, player);
 
   BoardWinState state = UpdateBoard(move);
 
