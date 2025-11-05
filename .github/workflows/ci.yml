@@ -48,6 +48,7 @@ jobs:
         path:
           - 'src'
           - 'include'
+          - 'tests'
 
     steps:
       - name: Checkout
