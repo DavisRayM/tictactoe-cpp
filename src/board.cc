@@ -11,6 +11,9 @@ static BoardWinState win_state(Token winner) {
   case Token::X:
     return BoardWinState::X_WIN;
     break;
+  default:
+    return BoardWinState::ERROR;
+    break;
   }
 }
 
