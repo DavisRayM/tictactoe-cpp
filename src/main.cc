@@ -64,6 +64,7 @@ int main(int argc, char **argv) {
     std::cout << game.Display();
 
     Update(game, simulate);
+    simulate = !simulate;
   }
   return 0;
 }
