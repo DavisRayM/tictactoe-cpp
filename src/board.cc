@@ -2,9 +2,6 @@
 
 static BoardWinState win_state(Token winner) {
   switch (winner) {
-    case Token::EMPTY:
-      return BoardWinState::ONGOING;
-      break;
     case Token::CIRCLE:
       return BoardWinState::CIRCLE_WIN;
       break;
@@ -12,8 +9,7 @@ static BoardWinState win_state(Token winner) {
       return BoardWinState::X_WIN;
       break;
     default:
-      return BoardWinState::ERROR;
-      break;
+      return BoardWinState::ONGOING;
   }
 }
 
@@ -39,11 +35,15 @@ bool Board::Play(int x, int y, Token player, Board* board) const {
 }
 
 BoardWinState Board::WinState() const {
-  for (auto& line : GetLines()) {
+  auto lines = GetLines();
+  for (auto& line : lines) {
     bool win = true;
 
     for (int i = 1; i < 3; i++) {
-      if (line[i - 1] != line[i]) win = false;
+      if (line[i] == Token::EMPTY || line[i - 1] != line[i]) {
+        win = false;
+        break;
+      }
     }
 
     if (win) return win_state(line[0]);
