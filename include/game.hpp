@@ -1,6 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 #include "board.hpp"
+#include <string>
 
 class Game {
 public:
@@ -20,52 +21,33 @@ public:
   }
 
   /// Display the current game board.
-  void Display() const;
+  std::string Display() const;
 
-  /// Updates the current game generation; requests or simulates a move
-  /// from the player and transitions to next state. Returns whether
-  /// the game is still live.
+  /// Updates current board generation.
   ///
-  /// pre: live is true
-  /// post: updates generation and live
-  bool Update(bool simulate = false);
+  /// pre: move is a valid move for the current generation
+  BoardWinState UpdateBoard(Move move);
+
+  /// Returns current player display token.
+  char PlayerDisplay() const;
+
+  /// Returns current player token.
+  Token PlayerToken() const;
+
+  /// Returns a read only pointer to the underlying
+  /// board.
+  Board *const CurrentBoard() const;
+
+  /// Returns whether the game is live.
+  bool IsLive() const;
+
+  /// Returns whether the move is valid
+  bool IsValidMove(Move move) const;
 
 private:
   Board *current;
   Token player;
   unsigned int generation;
   bool live;
-
-  /// Updates current board generation.
-  ///
-  /// pre: move is a valid move for the current generation
-  BoardWinState UpdateBoard(Move move) {
-    Board *next = new Board;
-    if (!current->Play(move.x, move.y, player, next))
-      return ERROR;
-
-    delete current;
-    this->current = next;
-    this->generation += 1;
-
-    if (player == X)
-      this->player = CIRCLE;
-    else
-      this->player = X;
-
-    auto winState = current->WinState();
-    switch (winState) {
-    case CIRCLE_WIN:
-    case X_WIN:
-    case DRAW:
-    case ERROR:
-      this->live = false;
-      break;
-    default:
-      break;
-    }
-
-    return winState;
-  }
 };
 #endif

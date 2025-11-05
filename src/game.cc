@@ -1,7 +1,7 @@
 #include <ai.hpp>
 #include <game.hpp>
-#include <iostream>
 
+namespace {
 /// Returns display character for a player token.
 static char player_token(size_t token) {
   switch (token) {
@@ -16,48 +16,60 @@ static char player_token(size_t token) {
     break;
   }
 }
+} // namespace
 
-static Move RequestMove(Board *board, Token player) {
-  int x, y;
-  do {
-    std::cout << "Enter x coordinate: ";
-    std::cin >> x;
-
-    std::cout << "Enter y coordinate: ";
-    std::cin >> y;
-  } while (!board->Play(x, y, player, nullptr));
-
-  return Move(x, y);
-}
-
-void Game::Display() const {
-  std::cout << "\n-------\n";
+std::string Game::Display() const {
+  std::string out = "";
+  out += "\n-------\n";
 
   for (int r = 0; r < 3; r++) {
     for (int c = 0; c < 3; c++) {
-      std::cout << "|" << player_token(current->state[r][c]);
+      out += "|";
+      out += player_token(current->state[r][c]);
     }
-    std::cout << "|\n-------\n";
+    out += "|\n-------\n";
   }
+
+  return out;
 }
 
-bool Game::Update(bool simulate) {
-  Move move(-1, -1);
+BoardWinState Game::UpdateBoard(Move move) {
+  Board *next = new Board;
+  if (!current->Play(move.x, move.y, player, next))
+    return ERROR;
 
-  std::cout << "\nPlayer " << player_token(player) << "'s turn.\n";
-  if (simulate)
-    move = BestMove(current, player);
+  delete current;
+  this->current = next;
+  this->generation += 1;
+
+  if (player == X)
+    this->player = CIRCLE;
   else
-    move = RequestMove(current, player);
+    this->player = X;
 
-  BoardWinState state = UpdateBoard(move);
+  auto winState = current->WinState();
+  switch (winState) {
+  case CIRCLE_WIN:
+  case X_WIN:
+  case DRAW:
+  case ERROR:
+    this->live = false;
+    break;
+  default:
+    break;
+  }
 
-  if (state == CIRCLE_WIN)
-    std::cout << "O wins!\n";
-  if (state == X_WIN)
-    std::cout << "X wins!\n";
-  if (state == DRAW)
-    std::cout << "No one wins!\n";
-
-  return this->live;
+  return winState;
 }
+
+char Game::PlayerDisplay() const { return player_token(player); }
+
+Token Game::PlayerToken() const { return player; }
+
+Board *const Game::CurrentBoard() const { return current; }
+
+bool Game::IsValidMove(Move move) const {
+  return current->Play(move.x, move.y, player, nullptr);
+}
+
+bool Game::IsLive() const { return live; }
