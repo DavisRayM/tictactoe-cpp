@@ -43,7 +43,6 @@ public:
 
   /// Returns whether the move is valid
   bool IsValidMove(Move move) const;
-
 private:
   Board *current;
   Token player;
