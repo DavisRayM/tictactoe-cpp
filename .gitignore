@@ -2,6 +2,7 @@
 *
 
 # Allow
+!.clang-format
 !.github/
 !.github/workflows/
 !.github/workflows/**/*
