@@ -5,20 +5,8 @@
 
 class Game {
 public:
-  Game() {
-    current = new Board;
-    player = Token::X;
-    generation = 0;
-    live = true;
-  }
-
-  ~Game() {
-    delete current;
-    current = nullptr;
-    generation = 0;
-    live = false;
-    player = Token::X;
-  }
+  Game() : current(new Board), player(Token::X), generation(0), live(true) {};
+  ~Game();
 
   /// Display the current game board.
   std::string Display() const;
@@ -43,6 +31,7 @@ public:
 
   /// Returns whether the move is valid
   bool IsValidMove(Move move) const;
+
 private:
   Board *current;
   Token player;

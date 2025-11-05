@@ -17,6 +17,15 @@ static char player_token(Token token) {
   }
 }
 } // namespace
+  //
+
+Game::~Game() {
+  delete current;
+  current = nullptr;
+  generation = 0;
+  live = false;
+  player = Token::X;
+}
 
 std::string Game::Display() const {
   std::string out = "";
