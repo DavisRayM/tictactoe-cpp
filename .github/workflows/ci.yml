@@ -37,20 +37,22 @@ jobs:
     - name: Build
       run: cmake --build build --config Release
   format:
-    name: Check format
+    name: Check format (${{ matrix.path }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        path:
+          - 'src'
+          - 'include'
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install clang-format
-        run: sudo apt-get update && sudo apt-get install -y clang-format
-
-      - name: Check formatting
-        run: |
-          FILES=$(find . -regex '.*\.\(cc\|hpp\)$')
-          for f in $FILES; do
-            echo "Formatting: $f"
-            clang-format -style=file "$f" | diff "$f" -
-          done
+      - name: Run clang-format style check
+        uses: jidicula/clang-format-action@v4.16.0
+        with:
+          clang-format-version: '21'
+          check-path: ${{ matrix.path }}
+          fallback-style: 'Google'
