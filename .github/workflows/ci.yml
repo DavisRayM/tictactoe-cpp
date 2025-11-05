@@ -50,10 +50,10 @@ jobs:
           - 'include'
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run clang-format style check
+      - name: Format
         uses: jidicula/clang-format-action@v4.16.0
         with:
           clang-format-version: '21'
