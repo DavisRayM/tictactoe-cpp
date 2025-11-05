@@ -52,5 +52,5 @@ jobs:
           FILES=$(find . -regex '.*\.\(cc\|hpp\)$')
           for f in $FILES; do
             echo "Formatting: $f"
-            clang-format -style=Google "$f" | diff "$f" -
+            clang-format -style=file "$f" | diff "$f" -
           done
