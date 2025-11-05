@@ -49,12 +49,8 @@ jobs:
 
       - name: Check formatting
         run: |
-          echo "Checking C++ code formatting using Google style..."
           FILES=$(find . -regex '.*\.\(cc\|hpp\)$')
           for f in $FILES; do
-            clang-format -style=Google "$f" | diff "$f" - >/dev/null
-            if [ $? -ne 0 ]; then
-              echo "File $f is not properly formatted"
-              exit 1
-            fi
+            echo "Formatting: $f"
+            clang-format -style=Google "$f" | diff "$f" -
           done
