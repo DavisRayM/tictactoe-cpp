@@ -74,7 +74,7 @@ std::vector<std::array<Token, 3>> Board::GetLines() const {
   /* Add row lines */
   lines.push_back({state[0][0], state[0][1], state[0][2]});
   lines.push_back({state[1][0], state[1][1], state[1][2]});
-  lines.push_back({state[1][0], state[1][1], state[1][2]});
+  lines.push_back({state[2][0], state[2][1], state[2][2]});
 
   /* Add column lines */
   lines.push_back({state[0][0], state[1][0], state[2][0]});
