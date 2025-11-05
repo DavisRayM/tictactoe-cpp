@@ -2,6 +2,9 @@
 *
 
 # Allow
+!.github/
+!.github/workflows/
+!.github/workflows/**/*
 !.gitignore
 !CMakeLists.txt
 !README.md
