@@ -36,6 +36,9 @@ jobs:
 
     - name: Build
       run: cmake --build build --config Release
+
+    - name: Test
+      run: ./build/bin/tests
   format:
     name: Check format (${{ matrix.path }})
     runs-on: ubuntu-latest

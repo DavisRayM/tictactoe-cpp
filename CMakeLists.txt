@@ -45,3 +45,5 @@ target_sources(LibTicTacToe
     src/ai.cc
 )
 set_target_properties(LibTicTacToe PROPERTIES LINKER_LANGUAGE CXX)
+
+add_subdirectory(tests)
