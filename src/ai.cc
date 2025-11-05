@@ -3,12 +3,12 @@
 #include <stdexcept>
 
 namespace {
-int EvaluateBoard(Board *board, Token maximizePlayer) {
+int EvaluateBoard(Board* board, Token maximizePlayer) {
   Token opp = (maximizePlayer == Token::CIRCLE) ? Token::X : Token::CIRCLE;
   int score = 0;
 
   auto lines = board->GetLines();
-  for (auto &line : lines) {
+  for (auto& line : lines) {
     int maxCount = 0, oppCount = 0, emptyCount = 0;
 
     for (auto cell : line) {
@@ -20,10 +20,8 @@ int EvaluateBoard(Board *board, Token maximizePlayer) {
         emptyCount++;
     }
 
-    if (maxCount == 2 && emptyCount == 1)
-      score += 10;
-    if (oppCount == 2 && emptyCount == 1)
-      score -= 10;
+    if (maxCount == 2 && emptyCount == 1) score += 10;
+    if (oppCount == 2 && emptyCount == 1) score -= 10;
   }
 
   for (int r = 0; r < 3; r++)
@@ -37,7 +35,7 @@ int EvaluateBoard(Board *board, Token maximizePlayer) {
   return score;
 }
 
-int InnerMiniMax(Board *board, int depth, bool maximize, Token currentPlayer,
+int InnerMiniMax(Board* board, int depth, bool maximize, Token currentPlayer,
                  Token maximizingPlayer) {
   Token nextPlayer =
       (currentPlayer == Token::CIRCLE) ? Token::X : Token::CIRCLE;
@@ -45,19 +43,19 @@ int InnerMiniMax(Board *board, int depth, bool maximize, Token currentPlayer,
 
   if (depth == 0 || moves.empty()) {
     switch (board->WinState()) {
-    case BoardWinState::CIRCLE_WIN:
-      return (maximizingPlayer == Token::CIRCLE) ? 1000 : -1000;
-    case BoardWinState::X_WIN:
-      return (maximizingPlayer == Token::X) ? 1000 : -1000;
-    case BoardWinState::DRAW:
-      return 0;
-    default:
-      return EvaluateBoard(board, maximizingPlayer);
+      case BoardWinState::CIRCLE_WIN:
+        return (maximizingPlayer == Token::CIRCLE) ? 1000 : -1000;
+      case BoardWinState::X_WIN:
+        return (maximizingPlayer == Token::X) ? 1000 : -1000;
+      case BoardWinState::DRAW:
+        return 0;
+      default:
+        return EvaluateBoard(board, maximizingPlayer);
     }
   }
 
   int bestScore = maximize ? INT_MIN : INT_MAX;
-  for (auto &move : moves) {
+  for (auto& move : moves) {
     Board next;
     if (!board->Play(move.x, move.y, currentPlayer, &next))
       throw std::runtime_error("Invalid move!");
@@ -69,16 +67,15 @@ int InnerMiniMax(Board *board, int depth, bool maximize, Token currentPlayer,
   }
   return bestScore;
 }
-} // namespace
+}  // namespace
 
-Move BestMove(Board *board, Token player, int depth) {
+Move BestMove(Board* board, Token player, int depth) {
   int bestScore = INT_MIN;
   Move bestMove(-1, -1);
 
-  for (auto &move : board->ValidMoves()) {
+  for (auto& move : board->ValidMoves()) {
     Board next;
-    if (!board->Play(move.x, move.y, player, &next))
-      continue;
+    if (!board->Play(move.x, move.y, player, &next)) continue;
 
     int score = InnerMiniMax(
         &next, depth - 1, false,

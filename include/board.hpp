@@ -34,7 +34,7 @@ struct Board {
   /// was succesful.
   ///
   /// pre: state[x][y] is not set.
-  bool Play(int x, int y, Token player, Board *board) const;
+  bool Play(int x, int y, Token player, Board* board) const;
 
   /// Returns the current win state of the board.
   BoardWinState WinState() const;

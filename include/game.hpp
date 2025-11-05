@@ -1,10 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
-#include "board.hpp"
 #include <string>
 
+#include "board.hpp"
+
 class Game {
-public:
+ public:
   Game() : current(new Board), player(Token::X), generation(0), live(true) {};
   ~Game();
 
@@ -24,7 +25,7 @@ public:
 
   /// Returns a read only pointer to the underlying
   /// board.
-  Board *const CurrentBoard() const;
+  Board* const CurrentBoard() const;
 
   /// Returns whether the game is live.
   bool IsLive() const;
@@ -32,8 +33,8 @@ public:
   /// Returns whether the move is valid
   bool IsValidMove(Move move) const;
 
-private:
-  Board *current;
+ private:
+  Board* current;
   Token player;
   unsigned int generation;
   bool live;

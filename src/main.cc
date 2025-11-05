@@ -2,7 +2,7 @@
 #include <game.hpp>
 #include <iostream>
 
-Move RequestMove(Game &game) {
+Move RequestMove(Game& game) {
   Move move;
   std::cout << "Enter x coordinate: ";
   std::cin >> move.x;
@@ -23,7 +23,7 @@ Move RequestMove(Game &game) {
   return move;
 }
 
-bool Update(Game &game, bool simulate) {
+bool Update(Game& game, bool simulate) {
   Move move;
   bool showBoard = false;
 
@@ -47,13 +47,12 @@ bool Update(Game &game, bool simulate) {
     std::cout << "No one wins!\n";
   }
 
-  if (showBoard)
-    std::cout << game.Display();
+  if (showBoard) std::cout << game.Display();
 
   return game.IsLive();
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   Game game;
   bool gameOngoing;
   bool simulate = false;
