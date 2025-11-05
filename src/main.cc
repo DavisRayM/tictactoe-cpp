@@ -3,7 +3,7 @@
 #include <iostream>
 
 Move RequestMove(Game &game) {
-  Move move(-1, -1);
+  Move move;
   std::cout << "Enter x coordinate: ";
   std::cin >> move.x;
 
@@ -24,7 +24,7 @@ Move RequestMove(Game &game) {
 }
 
 bool Update(Game &game, bool simulate) {
-  Move move(-1, -1);
+  Move move;
   bool showBoard = false;
 
   if (simulate)
