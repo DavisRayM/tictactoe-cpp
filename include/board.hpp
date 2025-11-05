@@ -27,7 +27,11 @@ struct Move {
 };
 
 struct Board {
-  Token state[3][3];
+  Token state[3][3] = {
+      {Token::EMPTY, Token::EMPTY, Token::EMPTY},
+      {Token::EMPTY, Token::EMPTY, Token::EMPTY},
+      {Token::EMPTY, Token::EMPTY, Token::EMPTY},
+  };
 
   /// Simulates the player move based on current board state.
   /// Updates the memory stored at `board`. Returns a boolean on whether process
