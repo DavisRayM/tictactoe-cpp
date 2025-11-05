@@ -34,15 +34,15 @@ bool Update(Game &game, bool simulate) {
 
   BoardWinState state = game.UpdateBoard(move);
 
-  if (state == CIRCLE_WIN) {
+  if (state == BoardWinState::CIRCLE_WIN) {
     showBoard = true;
     std::cout << "O wins!\n";
   }
-  if (state == X_WIN) {
+  if (state == BoardWinState::X_WIN) {
     showBoard = true;
     std::cout << "X wins!\n";
   }
-  if (state == DRAW) {
+  if (state == BoardWinState::DRAW) {
     showBoard = true;
     std::cout << "No one wins!\n";
   }

@@ -3,12 +3,12 @@
 
 namespace {
 /// Returns display character for a player token.
-static char player_token(size_t token) {
+static char player_token(Token token) {
   switch (token) {
-  case CIRCLE:
+  case Token::CIRCLE:
     return 'O';
     break;
-  case X:
+  case Token::X:
     return 'X';
     break;
   default:
@@ -36,23 +36,23 @@ std::string Game::Display() const {
 BoardWinState Game::UpdateBoard(Move move) {
   Board *next = new Board;
   if (!current->Play(move.x, move.y, player, next))
-    return ERROR;
+    return BoardWinState::ERROR;
 
   delete current;
   this->current = next;
   this->generation += 1;
 
-  if (player == X)
-    this->player = CIRCLE;
+  if (player == Token::X)
+    this->player = Token::CIRCLE;
   else
-    this->player = X;
+    this->player = Token::X;
 
   auto winState = current->WinState();
   switch (winState) {
-  case CIRCLE_WIN:
-  case X_WIN:
-  case DRAW:
-  case ERROR:
+  case BoardWinState::CIRCLE_WIN:
+  case BoardWinState::X_WIN:
+  case BoardWinState::DRAW:
+  case BoardWinState::ERROR:
     this->live = false;
     break;
   default:

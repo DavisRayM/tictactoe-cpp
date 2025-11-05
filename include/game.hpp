@@ -7,7 +7,7 @@ class Game {
 public:
   Game() {
     current = new Board;
-    player = X;
+    player = Token::X;
     generation = 0;
     live = true;
   }
@@ -17,7 +17,7 @@ public:
     current = nullptr;
     generation = 0;
     live = false;
-    player = X;
+    player = Token::X;
   }
 
   /// Display the current game board.
