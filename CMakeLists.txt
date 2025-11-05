@@ -20,6 +20,7 @@ target_sources(TicTacToe
     src/main.cc
     src/game.cc
     src/board.cc
+    src/ai.cc
 )
 target_compile_features(TicTacToe PRIVATE cxx_std_17)
 target_link_libraries(TicTacToe
