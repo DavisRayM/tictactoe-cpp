@@ -38,7 +38,9 @@ jobs:
       run: cmake --build build --config Release
 
     - name: Test
-      run: ./build/bin/tests
+      run: |
+        cd build/tests
+        ctest --output-on-failure
   format:
     name: Check format (${{ matrix.path }})
     runs-on: ubuntu-latest
